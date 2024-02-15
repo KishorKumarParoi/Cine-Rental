@@ -1,5 +1,18 @@
 import { useState } from "react";
 
+function submitForm(answer) {
+  // Pretend it's hitting the network
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (answer.toLowerCase() === 'Dhaka'.toLowerCase())
+        resolve();
+      else {
+        reject(new Error("You are Wrong, try again!"));
+      }
+    }, 3000);
+  })
+}
+
 function Main() {
 
   // Empty, Typing, Submitting, Success, Error
@@ -17,22 +30,23 @@ function Main() {
   }
 
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setStatus('submitting');
 
     console.log(e.target.tagName);
     console.log(answer);
-
-    if (answer.toLowerCase() === 'Dhaka'.toLowerCase()) {
+    try {
+      await submitForm(answer);
       setStatus('success');
-    } else {
-      setTimeout(() => {
-        setError('You are Wrong, try again!');
-        setStatus('typing');
-      }, 3000);
+    } catch (err) {
+      setStatus('typing');
+      console.log(err.message);
+      setError(err.message);
     }
   }
+
+
 
   function handleTextAreaChange(e) {
     setStatus('typing');
@@ -43,12 +57,12 @@ function Main() {
 
   return (
     <>
-      <form action="" className="p-4">
+      <form action="" className="p-4" onSubmit={handleSubmit}>
         <h1 className="text-xl">City Quiz</h1>
         <p>What city is located on two continents?</p>
         {<textarea name="" id="" cols="30" rows="10" className="border border-5 border-yellow-500 rounded-lg p-2" value={answer} disabled={status === 'submitting'} onChange={(e) => { handleTextAreaChange(e) }} ></textarea>}
         <br />
-        <button type="submit" className="bg-purple-400 w-22 rounded-lg px-4" disabled={answer === '' || status === 'submitting'} onClick={(e) => handleSubmit(e)}>Submit</button>
+        <button type="submit" className="bg-purple-400 w-22 rounded-lg px-4" disabled={answer === '' || status === 'submitting'}>Submit</button>
         {status === 'submitting' && <p className="py-2">Loading....</p>}
         {error && <p className="py-2 text-red-500">{error}</p>}
       </form >
