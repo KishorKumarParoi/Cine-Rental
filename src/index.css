@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .hover {
+        width: 200px;
+        background-color: blue;
+        border: 2rem;
+    }
+}
