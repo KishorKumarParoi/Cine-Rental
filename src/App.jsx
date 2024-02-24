@@ -1,42 +1,53 @@
 import { useState } from 'react';
+import AddTask from './components/AddTask';
+import TaskList from './components/Tasklist';
 
-export default function Scoreboard() {
-  const [isPlayerA, setIsPlayerA] = useState(true);
-  return (
-    <div>
-      {isPlayerA ? (
-        <Counter key="Taylor" person="Taylor" />
-      ) : (
-        <Counter key="Sarah" person="Sarah" />
-      )}
-      <button onClick={() => {
-        setIsPlayerA(!isPlayerA);
-      }}>
-        Next player!
-      </button>
-    </div>
-  );
-}
+export default function TaskApp() {
+  const [tasks, setTasks] = useState(initialTasks);
 
-function Counter({ person }) {
-  const [score, setScore] = useState(0);
-  const [hover, setHover] = useState(false);
+  function handleAddTask(text) {
+    setTasks([
+      ...tasks,
+      {
+        id: nextId++,
+        text: text,
+        done: false,
+      },
+    ]);
+  }
 
-  let className = 'counter';
-  if (hover) {
-    className += ' hover';
+  function handleChangeTask(task) {
+    setTasks(
+      tasks.map((t) => {
+        if (t.id === task.id) {
+          return task;
+        } else {
+          return t;
+        }
+      })
+    );
+  }
+
+  function handleDeleteTask(taskId) {
+    setTasks(tasks.filter((t) => t.id !== taskId));
   }
 
   return (
-    <div
-      className={className}
-      onPointerEnter={() => setHover(true)}
-      onPointerLeave={() => setHover(false)}
-    >
-      <h1>{person}'s score: {score}</h1>
-      <button onClick={() => setScore(score + 1)}>
-        Add one
-      </button>
-    </div>
+    <>
+      <h1>Prague itinerary</h1>
+      <AddTask onAddTask={handleAddTask} />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
+    </>
   );
 }
+
+let nextId = 3;
+const initialTasks = [
+  { id: 0, text: 'Visit Kafka Museum', done: true },
+  { id: 1, text: 'Watch a puppet show', done: false },
+  { id: 2, text: 'Lennon Wall pic', done: false },
+];
