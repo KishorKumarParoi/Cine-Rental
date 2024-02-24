@@ -1,67 +1,31 @@
-import { useState } from 'react';
-import { initialTravelPlan } from './places';
+import { useState } from "react";
 
-function PlaceTree({ Id, parentId, placesById, onComplete }) {
-  const place = placesById[Id];
-  const childIds = place.childIds;
+function Panel({ title, children, isActive, onShow }) {
 
   return (
     <>
-      <li>
-        {place.title}
-        <button onClick={() => onComplete(Id, parentId)}>Complete</button>
-        {childIds.length > 0 && (
-          <ol>
-            {
-              childIds.map((childId) => (
-                <PlaceTree key={childId} Id={childId} parentId={Id} placesById={placesById} onComplete={onComplete} />
-              )
-              )
-            }
-          </ol>
-        )
-        }
-      </li>
+      <h1 className="text-3xl">{title}</h1>
+      {
+        isActive ? <p>{children}</p> :
+          <button className="bg-yellow-500 rounded-lg p-2" onClick={onShow} >Show</button>
+      }
     </>
   )
+
 }
 
-function Planets() {
-  const [plan, updatePlan] = useState(initialTravelPlan);
-  const planetIds = plan[0].childIds;
+export default function Accordion() {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  function handleComplete(childId, parentId) {
-    console.log('completing...');
-    const parent = plan[parentId];
-    const nextParent = {
-      ...parent,
-      childIds: parent.childIds.filter(id => id !== childId)
-    }
-
-    updatePlan({
-      ...plan,
-      [parentId]: nextParent,
-    })
-  }
   return (
-    <>
-      <h1 className='text-3xl bg-yellow-400 '>Places to visit</h1>
-      <ol>
-        {
-          planetIds.map((id) => (
-            <PlaceTree key={id} Id={id} parentId={0} placesById={plan} onComplete={handleComplete} />
-          ))
-        }
-      </ol>
-    </>
-  )
-}
-
-
-export default function App() {
-  return (
-    <>
-      <Planets />
-    </>
-  )
+    <div className="m-4 p-4">
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel title="About" isActive={activeIndex === 0} onShow={() => setActiveIndex(0)}>
+        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel title="Etymology" isActive={activeIndex === 1} onShow={() => setActiveIndex(1)}>
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      </Panel>
+    </div>
+  );
 }
