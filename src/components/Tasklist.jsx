@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import { TasksContext, TasksDispatchContext } from "./TasksContext";
+import { useState } from "react";
+import { useTasks, useTasksDispatch } from "./TasksContext";
 
 export default function Tasklist() {
-    const tasks = useContext(TasksContext);
+    const tasks = useTasks();
 
     return (
         <>
@@ -22,7 +22,7 @@ export default function Tasklist() {
 function Task({ task }) {
     let taskContent = 'hello kkp';
     const [isEditing, setIsEditing] = useState(false);
-    const dispatch = useContext(TasksDispatchContext);
+    const dispatch = useTasksDispatch();
 
     if (isEditing) {
         taskContent = (
