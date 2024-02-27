@@ -6,7 +6,7 @@ export default function RecentPosts() {
     return (
         <Section>
             <Heading>Recent Posts</Heading>
-            <Post
+            <Post 
                 title="Flavors of Lisbon"
                 body="...those pastéis de nata!"
             />
