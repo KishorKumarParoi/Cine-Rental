@@ -16,7 +16,7 @@ export default function MovieList() {
 
                     {
                         MoviesData.map(movie => (
-                            <figure key={movie} className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
+                            <figure key={movie.id} className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
                                 <img className="w-full object-cover" src={getImageUrl(movie.cover)} alt={movie.title} />
                                 <figcaption className="pt-4">
                                     <h3 className="text-xl mb-1">{movie.title}</h3>
