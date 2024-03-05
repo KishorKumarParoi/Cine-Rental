@@ -4,6 +4,7 @@ import checkout from "../assets/icons/checkout.svg"
 
 export default function CartDetails({ onClose }) {
 
+
     return (
         <>
             <div

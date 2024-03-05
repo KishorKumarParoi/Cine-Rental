@@ -2,12 +2,7 @@ import tag from '../assets/tag.svg';
 import { getImageUrl } from "../utils/cine-utils";
 
 
-export default function MovieDetailsModal({ onClose, movie }) {
-
-    function handleAddToCart() {
-        console.log('added to cart...');
-    }
-
+export default function MovieDetailsModal({ onClose, movie, onAddCart }) {
     return (
         <>
             <div
@@ -37,7 +32,7 @@ export default function MovieDetailsModal({ onClose, movie }) {
                             <div className="grid lg:grid-cols-2 gap-2">
                                 <button
                                     className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                                    href="#" onClick={handleAddToCart}
+                                    href="#" onClick={() => onAddCart(movie)}
                                 >
                                     <img src={tag} alt="" />
                                     <span>${movie.price} | Add to Cart</span>

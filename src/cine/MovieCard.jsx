@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import tag from '../assets/tag.svg';
+import { MovieContext } from '../contexts';
 import { getImageUrl } from '../utils/cine-utils';
 import MovieDetailsModal from './MovieDetailsModal';
 import Rating from './Rating';
@@ -7,6 +8,8 @@ import Rating from './Rating';
 export default function MovieCard({ movie }) {
     const [showModal, setShowModal] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
+
+    const { cartData, setCartData } = useContext(MovieContext);
 
     function handleMovieSelection(e, movie) {
         e.preventDefault();
@@ -19,9 +22,22 @@ export default function MovieCard({ movie }) {
         setShowModal(false);
     }
 
+    function handleAddToCart(movie) {
+        console.log(movie);
+        const isFound = cartData.find(item => item.id === movie.id);
+        if (isFound) {
+            console.error(`The "${movie.title}" movie has already added!`);
+        } else {
+            setCartData([
+                ...cartData,
+                movie,
+            ]);
+        }
+    }
+
     return (
         <>
-            {showModal && <  MovieDetailsModal onClose={handleClose} movie={selectedMovie} />}
+            {showModal && <  MovieDetailsModal onClose={handleClose} movie={selectedMovie} onAddCart={handleAddToCart} />}
 
             <figure key={movie.id} className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
                 <a href="" onClick={(e) => handleMovieSelection(e, movie)} >
@@ -32,13 +48,14 @@ export default function MovieCard({ movie }) {
                         <div className="flex items-center space-x-1 mb-5">
                             <Rating value={movie.rating} />
                         </div>
-                        <button className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                        >
-                            <img src={tag} alt="" />
-                            <span>${movie.price} | Add to Cart</span>
-                        </button>
                     </figcaption>
                 </a>
+                <button className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
+                    onClick={() => handleAddToCart(movie)}
+                >
+                    <img src={tag} alt="" />
+                    <span>${movie.price} | Add to Cart</span>
+                </button>
             </figure>
         </>
     )
