@@ -1,5 +1,5 @@
-import MovieCard from './cine/MovieCard';
-import { getAllMovies } from './data/MoviesData';
+import { getAllMovies } from '../data/MoviesData';
+import MovieCard from './MovieCard';
 
 export default function MovieList() {
 

@@ -1,5 +1,5 @@
-import MovieList from './MovieList'
 import Sidebar from './Sidebar'
+import MovieList from './cine/MovieList'
 
 export default function Main() {
     return (
