@@ -1,7 +1,7 @@
 import deleteIcon from "../assets/delete.svg";
 import { getImageUrl } from '../utils/cine-utils';
 
-export default function CartCard({ movie }) {
+export default function CartCard({ movie, onDelete }) {
     return (
         <>
             <div key={movie.id} className="grid grid-cols-[1fr_auto] gap-4">
@@ -26,7 +26,7 @@ export default function CartCard({ movie }) {
                         className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                     >
                         <img className="w-5 h-5" src={deleteIcon} alt="delete" />
-                        <span className="max-md:hidden">Remove</span>
+                        <span className="max-md:hidden" onClick={() => onDelete(movie.id)}>Remove</span>
                     </button>
                 </div>
             </div>

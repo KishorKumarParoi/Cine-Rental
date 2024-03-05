@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext } from 'react';
 import checkout from "../assets/icons/checkout.svg";
 import { MovieContext } from '../contexts';
@@ -5,8 +6,17 @@ import CartCard from './CartCard';
 
 export default function CartDetails({ onClose }) {
 
-    const { cartData } = useContext(MovieContext);
+    const { cartData, setCartData } = useContext(MovieContext);
 
+    function handleRemove(movieId) {
+        const movie = cartData.find((item) => item.id === movieId);
+        console.log(movie);
+
+        const filteredItems = cartData.filter((item) => item.id !== movieId);
+        setCartData([
+            ...filteredItems,
+        ]);
+    }
     return (
         <>
             <div
@@ -22,11 +32,17 @@ export default function CartDetails({ onClose }) {
                         <div
                             className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
                         >
+
                             {
-                                cartData.map((movie) => (
-                                    <CartCard key={movie.id} movie={movie} />
-                                ))
+                                cartData.length === 0 ? (
+                                    <p className='text-2xl'>The Cart is Empty</p>
+                                ) :
+
+                                    cartData.map((movie) => (
+                                        <CartCard key={movie.id} movie={movie} onDelete={handleRemove} />
+                                    ))
                             }
+
 
                         </div>
                         <div className="flex items-center justify-end gap-2">
