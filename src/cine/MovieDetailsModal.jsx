@@ -4,6 +4,10 @@ import { getImageUrl } from "../utils/cine-utils";
 
 export default function MovieDetailsModal({ onClose, movie }) {
 
+    function handleAddToCart() {
+        console.log('added to cart...');
+    }
+
     return (
         <>
             <div
@@ -31,13 +35,13 @@ export default function MovieDetailsModal({ onClose, movie }) {
                                 {movie.description}
                             </p>
                             <div className="grid lg:grid-cols-2 gap-2">
-                                <a
+                                <button
                                     className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                                    href="#"
+                                    href="#" onClick={handleAddToCart}
                                 >
                                     <img src={tag} alt="" />
                                     <span>${movie.price} | Add to Cart</span>
-                                </a>
+                                </button>
                                 <a
                                     className="border border-[#74766F] rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#6F6F6F] dark:text-gray-200 font-semibold text-sm"
                                     href="#" onClick={onClose}
