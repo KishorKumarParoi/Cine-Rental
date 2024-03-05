@@ -1,8 +1,9 @@
-# React + Vite
+## ❒ CineRental: Your One-Stop React App for Movie Magic and Rentals
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Movie Renter - Create an app to rent a movie.
+- List out the movies with cover image, title, rating, rent price
+- Allow users to see the details of the movie
+- Allow users to add one or movies(max 5) to the cart. Add to cart should be allowed from both movie list and movie details page.
+- Show the number of items near the cart icon
+- Allow users to remove items from cart and do a fake guest checkout from the cart modal.
+- Allow users to switch between light and dark modes seamlessly

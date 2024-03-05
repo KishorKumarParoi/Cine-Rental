@@ -1,7 +1,7 @@
-import sun from "../assets/icons/sun.svg"
-import logo from '../assets/logo.svg'
-import ring from "../assets/ring.svg"
-import shoppingCart from "../assets/shopping-cart.svg"
+import sun from "./assets/icons/sun.svg"
+import logo from './assets/logo.svg'
+import ring from "./assets/ring.svg"
+import shoppingCart from "./assets/shopping-cart.svg"
 
 export default function Header() {
     return (
