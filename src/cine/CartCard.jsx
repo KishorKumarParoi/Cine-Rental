@@ -26,7 +26,7 @@ export default function CartCard({ movie, onDelete }) {
                         className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                     >
                         <img className="w-5 h-5" src={deleteIcon} alt="delete" />
-                        <span className="max-md:hidden" onClick={() => onDelete(movie.id)}>Remove</span>
+                        <span className="max-md:hidden" onClick={(e) => onDelete(e, movie)}>Remove</span>
                     </button>
                 </div>
             </div>

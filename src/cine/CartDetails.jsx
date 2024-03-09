@@ -1,22 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import checkout from "../assets/icons/checkout.svg";
 import { MovieContext } from '../contexts';
 import CartCard from './CartCard';
 
 export default function CartDetails({ onClose }) {
 
-    const { cartData, setCartData } = useContext(MovieContext);
+    const { state, dispatch } = useContext(MovieContext);
 
-    function handleRemove(movieId) {
-        const movie = cartData.find((item) => item.id === movieId);
-        console.log(movie);
+    function handleRemove(event, item) {
+        event.preventDefault();
+        dispatch({
+            type: 'REMOVE_FROM_CART',
+            payload: item,
+        });
 
-        const filteredItems = cartData.filter((item) => item.id !== movieId);
-        setCartData([
-            ...filteredItems,
-        ]);
+        toast.success(`Removed "${item.title}" movie from Cart !`, {
+            position: "bottom-right",
+        });
     }
+
     return (
         <>
             <div
@@ -34,11 +38,11 @@ export default function CartDetails({ onClose }) {
                         >
 
                             {
-                                cartData.length === 0 ? (
+                                state.cartData.length === 0 ? (
                                     <p className='text-2xl'>The Cart is Empty</p>
                                 ) :
 
-                                    cartData.map((movie) => (
+                                    state.cartData.map((movie) => (
                                         <CartCard key={movie.id} movie={movie} onDelete={handleRemove} />
                                     ))
                             }

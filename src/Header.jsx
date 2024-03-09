@@ -9,7 +9,7 @@ import { MovieContext, ThemeContext } from "./contexts"
 
 export default function Header() {
     const [showCart, setShowCart] = useState(false);
-    const { cartData } = useContext(MovieContext);
+    const { state } = useContext(MovieContext);
     const { darkMode, setDarkMode } = useContext(ThemeContext);
 
     function handleCart() {
@@ -48,7 +48,7 @@ export default function Header() {
                             <button className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block" onClick={handleCart} >
                                 <img src={shoppingCart} width="24" height="24" alt="" />
                                 <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white 
-                                text-center p-[2px] w-[30px] h-[30px] "> {cartData.length} </span>
+                                text-center p-[2px] w-[30px] h-[30px] "> {state.cartData.length} </span>
                             </button>
                         </li>
                     </ul>
