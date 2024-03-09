@@ -1,19 +1,18 @@
-import { useState } from "react"
-import Footer from "./Footer"
-import Header from "./Header"
-import Main from "./Page"
-import { MovieContext } from "./contexts"
+import { useState } from "react";
+import Page from './Page';
+import { MovieContext, ThemeContext } from "./contexts";
 
 export default function App() {
   const [cartData, setCartData] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
     <>
-      <MovieContext.Provider value={{ cartData, setCartData }}>
-        <Header />
-        <Main />
-        <Footer />
-      </MovieContext.Provider>
+      <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+        <MovieContext.Provider value={{ cartData, setCartData }}>
+          <Page />
+        </MovieContext.Provider>
+      </ThemeContext.Provider >
     </>
   )
 }

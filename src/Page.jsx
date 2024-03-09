@@ -1,15 +1,19 @@
-import Sidebar from './Sidebar'
-import MovieList from './cine/MovieList'
+import { useContext } from 'react';
+import Content from './Content';
+import Footer from "./Footer";
+import Header from "./Header";
+import { ThemeContext } from './contexts';
 
-export default function Main() {
+export default function Page() {
+    const { darkMode } = useContext(ThemeContext);
+
     return (
         <>
-            <main>
-                <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-                    <Sidebar />
-                    <MovieList />
-                </div>
-            </main>
+            <div className={`h-full w-full ${darkMode ? 'dark' : ''}`}>
+                <Header />
+                <Content />
+                <Footer />
+            </div>
         </>
     )
 }
