@@ -17,6 +17,7 @@ export default function App() {
           <ToastContainer />
         </MovieContext.Provider>
       </ThemeContext.Provider >
+
     </>
   )
 }
