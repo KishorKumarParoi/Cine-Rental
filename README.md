@@ -7,3 +7,4 @@
 - Show the number of items near the cart icon
 - Allow users to remove items from cart and do a fake guest checkout from the cart modal.
 - Allow users to switch between light and dark modes seamlessly
+- Toastified Messages showing
